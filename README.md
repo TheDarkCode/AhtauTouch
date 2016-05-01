@@ -9,7 +9,7 @@ Import AhtauTouch at the top of the file containing the class in which you plan 
 import AhtauTouch
 ```
 
-Create a AhtauTouch object, register your view controller for handling the peek and specify the source view. You will also need to declare that your view controller will conform to the AhtauTouchPreviewingDelegate protocol.
+First create an AhtauTouch object with a reference to the containing view controller amd source view for gesture recognition. Then add methods to conform to AhtauTouchPreviewingDelegate.
 
 ```swift
 // final prefix for optimization if your View Controller is not being subclassed.
@@ -85,6 +85,11 @@ Collection of example applications written in Swift / Objective-C for iOS 9.x (d
   - 3) Commit your changes: ```git commit -am 'Adding some super awesome update'```
   - 4) Push to the branch: ```git push origin Your-New-Feature```
   - 5) Submit a pull request!
+
+## Acknowledgements
+
+PeekPop by Roy Marmelstein
+[https://github.com/marmelroy/PeekPop](https://github.com/marmelroy/PeekPop)
 
 ## License
 Copyright (c) 2016 Mark Hamilton / dryverless (http://www.dryverless.com)
