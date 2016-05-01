@@ -1,6 +1,47 @@
 # AhtauTouch
 Peek and Pop extensions compatible with all iOS devices.
 
+## Usage
+
+Import AhtauTouch at the top of the file containing the class in which you plan on supporting previewing (Peek) and commit (Pop).
+
+```swift
+import AhtauTouch
+```
+
+Create a AhtauTouch object, register your view controller for handling the peek and specify the source view. You will also need to declare that your view controller will conform to the AhtauTouchPreviewingDelegate protocol.
+
+```swift
+// final prefix for optimization if your View Controller is not being subclassed.
+final class ViewController: UIViewController, AhtauTouchPreviewingDelegate {
+    
+    // AhtauTouch Object
+    var ahtauTouch: AhtauTouch?
+        
+    override func viewDidLoad() {
+        
+        // Initialize with Reference to Containing View Controller
+        ahtauTouch = AhtauTouch(viewController: self)
+
+        // Register View to Target for Observing Gestures (self.view is used to ensure proper rendering).
+        ahtauTouch?.registerForPreviewingWithDelegate(self, sourceView: self.view)
+    }
+
+}
+```
+
+As with Apple's own 3D Touch preview APIs, AhtauTouchPreviewingDelegate requires implementing two methods in the conforming class. 
+
+The first function defines the View Controller initialized as the previewing context: 
+```swift
+    func previewingContext(previewingContext: PreviewingContext, viewControllerForLocation location: CGPoint) -> UIViewController?
+```
+
+The second function then defines how to handle the actual use of that previewing context for the "Pop" action: 
+```swift
+    func previewingContext(previewingContext: PreviewingContext, commitViewController viewControllerToCommit: UIViewController)
+```
+
 ##CocoaPods
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
