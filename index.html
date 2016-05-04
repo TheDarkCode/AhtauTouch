@@ -25,6 +25,42 @@
 <p>Peek and Pop extensions compatible with all iOS devices.</p>
 
 <h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Import AhtauTouch at the top of the file containing the class in which you plan on supporting previewing (Peek) and commit (Pop).</p>
+
+<div class="highlight highlight-source-swift"><pre><span class="pl-k">import</span> <span class="pl-c1">AhtauTouch</span></pre></div>
+
+<p>First create an AhtauTouch object with a reference to the containing view controller amd source view for gesture recognition. Then add methods to conform to AhtauTouchPreviewingDelegate.</p>
+
+<div class="highlight highlight-source-swift"><pre><span class="pl-c">// final prefix for optimization if your View Controller is not being subclassed.</span>
+<span class="pl-k">final</span> <span class="pl-k">class</span> ViewController: UIViewController, AhtauTouchPreviewingDelegate {
+
+    <span class="pl-c">// AhtauTouch Object</span>
+    <span class="pl-k">var</span> ahtauTouch: AhtauTouch?
+
+    <span class="pl-k">override</span> <span class="pl-k">func</span> <span class="pl-en">viewDidLoad</span>() {
+
+        <span class="pl-c">// Initialize with Reference to Containing View Controller</span>
+        ahtauTouch <span class="pl-k">=</span> AhtauTouch(viewController: <span class="pl-k">self</span>)
+
+        <span class="pl-c">// Register View to Target for Observing Gestures (self.view is used to ensure proper rendering).</span>
+        ahtauTouch?<span class="pl-k">.</span>registerForPreviewingWithDelegate(<span class="pl-k">self</span>, sourceView: <span class="pl-k">self</span><span class="pl-k">.</span>view)
+    }
+
+}</pre></div>
+
+<p>As with Apple's own 3D Touch preview APIs, AhtauTouchPreviewingDelegate requires implementing two methods in the conforming class. </p>
+
+<p>The first function defines the View Controller initialized as the previewing context: </p>
+
+<div class="highlight highlight-source-swift"><pre>    <span class="pl-k">func</span> <span class="pl-en">previewingContext</span>(previewingContext: PreviewingContext, <span class="pl-en">viewControllerForLocation</span> <span class="pl-smi">location</span>: CGPoint) <span class="pl-k">-&gt;</span> UIViewController?</pre></div>
+
+<p>The second function then defines how to handle the actual use of that previewing context for the "Pop" action: </p>
+
+<div class="highlight highlight-source-swift"><pre>    <span class="pl-k">func</span> <span class="pl-en">previewingContext</span>(previewingContext: PreviewingContext, <span class="pl-en">commitViewController</span> <span class="pl-smi">viewControllerToCommit</span>: UIViewController)</pre></div>
+
+<h2>
 <a id="cocoapods" class="anchor" href="#cocoapods" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CocoaPods</h2>
 
 <p><a href="http://cocoapods.org">CocoaPods</a> is a dependency manager for Cocoa projects. You can install it with the following command:</p>
@@ -79,6 +115,12 @@ pod <span class="pl-s"><span class="pl-pds">'</span>AhtauTouch<span class="pl-pd
 </li>
 <li>5) Submit a pull request!</li>
 </ul>
+
+<h2>
+<a id="acknowledgements" class="anchor" href="#acknowledgements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Acknowledgements</h2>
+
+<p>PeekPop by Roy Marmelstein
+<a href="https://github.com/marmelroy/PeekPop">https://github.com/marmelroy/PeekPop</a></p>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
